@@ -36,3 +36,56 @@ I didn't steer the agent per say as I needed to create a new chat as repeating t
 > What would you do differently next time?
 
 I enjoyed directing AI to build something for me. Telling what I want AI to code and reviewing it is way more efficient then typing it out and the reviewing it. I think with the smaller sample size request and telling it where information is can greatly speed up the process, this was the suprise to me because I had seen AI used on other projects but the time to implement requests from the agent took longer and so did the reviewing. Next time I will be more thorough and direct with my statements.
+
+-------------------------------------------------------------------------------------------------------
+
+## Activity 2: Building the Dashboard Shell
+
+### Prompt 1
+
+**What I asked:**
+> (Paste the main prompt you used to create the dashboard layout)
+Using the shadcn sidebar components that are now in my src/components/ui/ folder,
+create a professional, collapsible dashboard layout. It should include:
+
+1. A sidebar (src/components/app-sidebar.tsx) with navigation links for:
+   - Overview (use the Home icon from lucide-react)
+   - Projects (use the FolderOpen icon)
+   - Settings (use the Settings icon)
+
+2. A top navigation area with breadcrumbs showing the current page.
+
+3. A main content area that wraps the existing page content.
+
+4. Update src/app/layout.tsx to use the new SidebarProvider and sidebar layout.
+
+Important: Preserve the Developer Profile content from Activity 1 in
+src/app/page.tsx — it should appear in the main content area of the new layout.
+Keep the dark mode toggle working.
+
+**What happened:**
+> (Describe how the Agent handled multiple files. Did it create
+> app-sidebar.tsx correctly? Did it modify layout.tsx as expected?)
+The Agent handled multiple files well reviewing page and layout to make the necessary changes to layout and create our app-sidebar. Everything was produced as expected.
+
+### Prompt 2
+
+**What I asked:**
+> (Paste any follow-up prompt — maybe a responsive fix, a styling
+> adjustment, or recovering from an Agent mistake)
+I provided the AI with a prompt to fix my global.css. Can you fix the global.css problom/error on ln20 of layout.tsx? I'd like it to stop saying that it can't find it. I don't want to completely overhaul anything though.
+
+**What happened:**
+> (Describe the result. Did the Agent fix the issue on the first try?)
+
+The agent seems to have fixed the issue on the first try. I don't see any issues and haven't ran into any yet. Searched just about every file in my repo to determine the issue before applying the necessary changes.
+
+### Reflection
+
+> Did the Agent accidentally delete or overwrite any of your Activity 1
+> code? If so, how did you recover? (Copilot Edits has an "Undo" /
+> "Revert" button — did you use it?) What did you learn about giving
+> the Agent context about existing code you want to preserve?
+I had to delete the smaller theme from my app/globals.css not so much the agent deleting or overwriting anything. I have used the revert button... just not during this activity. I learned that AI will not touch existing code that you want to preserve. However, there are some occassions it might make/suggest a minor chnage in one of those files if it's not effecting the outcome of the content in that file.
+
+-------------------------------------------------------------------------------------------------------
