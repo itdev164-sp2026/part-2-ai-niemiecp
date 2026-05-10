@@ -89,3 +89,45 @@ The agent seems to have fixed the issue on the first try. I don't see any issues
 I had to delete the smaller theme from my app/globals.css not so much the agent deleting or overwriting anything. I have used the revert button... just not during this activity. I learned that AI will not touch existing code that you want to preserve. However, there are some occassions it might make/suggest a minor chnage in one of those files if it's not effecting the outcome of the content in that file.
 
 -------------------------------------------------------------------------------------------------------
+
+## Activity 3: Server-Side Data with Supabase
+
+### Prompt 1
+
+**What I asked:**
+> (Paste the prompt you used to generate the projects page)
+  Using the Supabase client at src/lib/supabase.ts, create a new Server Component
+at src/app/projects/page.tsx that:
+
+1. Fetches all records from the "projects" table in Supabase
+2. Displays them in a professional layout using shadcn/ui Card components
+   (run `npx shadcn@latest add card` if needed)
+3. Each card should show the project title, description, and a status badge
+4. The status badge should be color-coded:
+   - "active" = green
+   - "completed" = blue
+   - "archived" = gray
+
+Use @workspace context to match the styling of our existing Dashboard.
+This must be a React Server Component (async function, no "use client").
+Do NOT use useEffect or useState for data fetching.
+
+**What happened:**
+> (Did the Agent create a Server Component or a Client Component?
+> Did it use async/await or useEffect? Did you have to correct it?)
+The agent created a Server Component. The agent used async/await off the get go and I didn't need to correct it.
+
+### Prompt 2
+**What I asked:**
+> (Paste any follow-up prompt — fixing a connection error, refactoring
+> from useEffect to a Server Component, or adjusting the card layout)
+  Get rid of the error check and change "supabaseAnonKey" to "supabaseKey"
+**What happened:**
+> (Describe the result and what you learned from the exchange)
+  The Ai removed the error check it had created and changed the string naming but added ?? "" at the end of both string for createClient. It also failed to add !; to the keys.
+### Reflection
+> How does fetching data on the server feel different from the useEffect
+> pattern you used in Web Programming 1? What are the advantages you
+> noticed? Did anything surprise you about how simple server-side
+> data fetching is in the App Router?
+It felt a lot more efficient, both the setup and execution. Any changes are nearly istant.
