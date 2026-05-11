@@ -131,3 +131,84 @@ The agent created a Server Component. The agent used async/await off the get go 
 > noticed? Did anything surprise you about how simple server-side
 > data fetching is in the App Router?
 It felt a lot more efficient, both the setup and execution. Any changes are nearly istant.
+
+-------------------------------------------------------------------------------------------------------
+
+## Activity 4: AI-Driven Forms & Validation
+
+### Prompt 1
+**What I asked:**
+> (Paste the prompt you used to create the Zod schema)
+Create a Zod validation schema in a new file src/lib/schemas.ts for a "Project"
+with the following fields:
+
+- title: string, minimum 3 characters, with a custom error message
+  "Title must be at least 3 characters"
+- description: string, minimum 10 characters, with a custom error message
+  "Description must be at least 10 characters"
+- status: enum with values "active", "completed", "archived"
+
+Export the schema and also export the inferred TypeScript type using z.infer.
+
+**What happened:**
+> (Did the Agent create the schema correctly? Did it export both
+> the schema and the inferred type?)
+The agent created the schema correctly and exports both the schema and the inferred TypeScript type using z.infer.
+
+### Prompt 2
+**What I asked:**
+> (Paste the prompt you used to generate the form and Server Action)
+Using the Zod schema from src/lib/schemas.ts, do the following:
+
+1. Create a form component at src/components/project-form.tsx that:
+   - Is a Client Component ("use client") because it uses react-hook-form hooks
+   - Uses react-hook-form with the zodResolver from @hookform/resolvers for validation
+   - Uses shadcn/ui Field, FieldLabel, and FieldError for field layout
+   - Uses shadcn/ui Input for title, Textarea for description, and Select for status
+   - Shows inline error messages under each field when validation fails
+   - Has a "Create Project" submit button
+   - Shows a sonner toast notification on successful submission
+
+2. Create a Server Action at src/app/actions.ts that:
+   - Has "use server" at the top of the file
+   - Accepts the validated form data
+   - Validates it again with the Zod schema (server-side validation)
+   - Inserts the validated data into the Supabase "projects" table
+   - Returns a success or error response
+
+3. Create a new page at src/app/projects/new/page.tsx that renders
+   the project form within the dashboard layout.
+
+4. Add a "New Project" button to the existing projects page
+   (src/app/projects/page.tsx) that links to /projects/new.
+
+Use @workspace to match the existing project styling.
+
+**What happened:**
+> (How did the Agent handle creating multiple files? Did it connect
+> the form submission to the Server Action correctly? Did it include
+> server-side Zod validation?)
+The agent handled it well and it connected the form submission to the Server Action correctly. However it did not include the server-side Zod Validation which was then fixed with the follow up prompt pasted below.
+
+    The Server Action should validate the form data with the Zod schema
+    before inserting into Supabase. Never trust client-side validation alone —
+    always re-validate on the server. Add projectSchema.safeParse() to the
+    action and return an error if validation fails.
+
+### Prompt 3 (if applicable)
+**What I asked:**
+> (Any follow-up prompt — fixing notifications, adding server-side
+> validation, or correcting form field behavior)
+Can you add <Toaster /> to layout.tsx? I've already made the proper import. This is so we can see the toast notification when we create a new project
+
+**What happened:**
+> (Describe the result)
+### Reflection
+The agent inserted <Toaster /> properly and notfications now work.
+
+> How does the Schema-First approach with Zod change the way you think
+> about forms? How does it help prevent "junk data" from entering the
+> database? Compare this to how you handled form validation in
+> previous courses.
+
+Makes me like form creation a little more. It helps prevent "junk data" by validation before insertion.
