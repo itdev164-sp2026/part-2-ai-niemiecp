@@ -1,5 +1,7 @@
+import Link from "next/link"
 import { supabase } from "@/lib/supabase"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -46,16 +48,21 @@ export default async function ProjectsPage() {
   return (
     <div className="space-y-10">
       <section className="space-y-4">
-        <div className="max-w-3xl space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-            Projects
-          </p>
-          <h1 className="text-4xl font-semibold tracking-tight text-foreground">
-            Active work and completed engagements
-          </h1>
-          <p className="text-base leading-7 text-muted-foreground">
-            Browse your project portfolio in a clean dashboard layout. Each card highlights the project scope and current status.
-          </p>
+        <div className="flex items-start justify-between gap-4">
+          <div className="max-w-3xl space-y-2">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-muted-foreground">
+              Projects
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
+              Active work and completed engagements
+            </h1>
+            <p className="text-base leading-7 text-muted-foreground">
+              Browse your project portfolio in a clean dashboard layout. Each card highlights the project scope and current status.
+            </p>
+          </div>
+          <Button asChild className="shrink-0">
+            <Link href="/projects/new">New Project</Link>
+          </Button>
         </div>
       </section>
 

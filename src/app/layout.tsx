@@ -12,6 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import "@/app/globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -54,6 +55,7 @@ export default function RootLayout({
                 {children}
               </main>
             </SidebarInset>
+            <Toaster />
           </SidebarProvider>
         </ThemeProvider>
       </body>
