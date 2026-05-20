@@ -212,3 +212,69 @@ The agent inserted <Toaster /> properly and notfications now work.
 > previous courses.
 
 Makes me like form creation a little more. It helps prevent "junk data" by validation before insertion.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Activity 5: Securing the App with Supabase Auth
+
+### Prompt 1
+**What I asked:**
+> (Paste the main prompt you used for the full auth implementation)
+Implement a complete email/password authentication flow for this Next.js 15
+App Router project using @supabase/ssr. Here is what I need:
+
+1. SUPABASE CLIENTS: Create server-side Supabase client utilities in
+   src/lib/supabase/ that work correctly with Next.js cookies. I need
+   separate clients for Server Components, Server Actions, and Middleware.
+
+2. LOGIN PAGE: Create a page at src/app/(auth)/login/page.tsx with a
+   shadcn/ui card-based login form. It should support both "Sign In"
+   and "Sign Up" (toggle between them or use tabs). Handle the auth
+   via Server Actions, not client-side fetch.
+
+3. MIDDLEWARE: Create a middleware.ts file at src/middleware.ts (next to
+   the app directory — Next.js looks for middleware as a sibling of app)
+   that:
+   - Refreshes the user's auth session on every request
+   - Protects the /projects routes — redirect unauthenticated users to /login
+   - Allows unauthenticated access to /login
+   - Uses supabase.auth.getUser() (NOT getSession()) for verification
+
+4. SIGN OUT: Add a "Sign Out" button to the existing sidebar component
+   (src/components/app-sidebar.tsx) that calls a Server Action to sign
+   the user out and redirect to /login. The button must only render
+   when an authenticated user is present — pass the user as a prop from
+   the root layout (which will need to fetch it via the server Supabase
+   client) and gate the Sign Out UI on that prop.
+
+5. UPDATE DATA QUERIES: Modify the projects page and the create-project
+   Server Action to use the authenticated Supabase client so that RLS
+   policies filter data per user.
+
+Use @workspace to understand the existing project structure. Do not remove
+or break existing functionality — integrate auth around it.
+
+**What happened:**
+> (How many files did the Agent create or modify? Did it handle
+> middleware, login page, sign out, and data scoping all in one pass?)
+
+The agent created 6 files and modified 5 for a total of 11 total. The agent was able to handle all the changes in one pass with no issues.
+
+### Prompt 2
+**What I asked:**
+> (Paste any follow-up — fixing the redirect after login, correcting
+> getSession vs getUser, handling middleware route matching, etc.)
+None
+
+**What happened:**
+> (Describe the fix and what you learned)
+N/A
+
+### Reflection
+> How did the Agent handle the creation of middleware.ts? Did you have
+> to manually add files to the Working Set for context? What surprised
+> you about how many files needed to change to add authentication?
+> How does middleware-based auth compare to checking login status
+> inside each page component?f
+
+The agent handled the creation well, it created the middleware.ts ater working on the Supabase SSR CLient Utilities, Authenication Schema & Actions, and the Login Page. I did not have to manually add any files. I was suprised that we modified just about as many files as we created despite implementing new features/objects. From personal experience, middleware auth is easier because I only have to check login in one place. Checking inside each page works, but it gets repetitive and easier to forget on some pages. Middleware feels cleaner because it blocks users before the page loads.
