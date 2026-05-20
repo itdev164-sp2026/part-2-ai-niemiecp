@@ -2,7 +2,9 @@ import {
   Home,
   FolderOpen,
   Settings,
+  LogOut,
 } from "lucide-react";
+import { signOut } from "@/app/auth-actions";
 import {
   Sidebar,
   SidebarContent,
@@ -10,7 +12,14 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarFooter,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import type { User } from "@supabase/supabase-js";
+
+interface AppSidebarProps {
+  user?: User | null;
+}
 
 const items = [
   {
@@ -30,7 +39,7 @@ const items = [
   },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ user }: AppSidebarProps) {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -52,6 +61,26 @@ export function AppSidebar() {
           ))}
         </SidebarMenu>
       </SidebarContent>
+      {user && (
+        <SidebarFooter>
+          <div className="space-y-2 border-t pt-4">
+            <div className="px-2 text-xs text-muted-foreground">
+              {user.email}
+            </div>
+            <form action={signOut} className="w-full">
+              <Button
+                type="submit"
+                variant="outline"
+                size="sm"
+                className="w-full justify-start"
+              >
+                <LogOut className="mr-2 h-4 w-4" />
+                Sign Out
+              </Button>
+            </form>
+          </div>
+        </SidebarFooter>
+      )}
     </Sidebar>
   );
 }

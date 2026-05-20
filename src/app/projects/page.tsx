@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { supabase } from "@/lib/supabase"
+import { createClient } from "@/lib/supabase/server"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
@@ -31,6 +31,8 @@ function getStatusClasses(status: string) {
 }
 
 async function getProjects(): Promise<Project[]> {
+  const supabase = await createClient()
+  
   const { data, error } = await supabase
     .from("projects")
     .select("id,title,description,status")

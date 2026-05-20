@@ -1,6 +1,6 @@
 "use server"
 
-import { supabase } from "@/lib/supabase"
+import { createServerActionClient } from "@/lib/supabase/server-action"
 import { projectSchema, type Project } from "@/lib/schemas"
 
 export async function createProject(data: unknown) {
@@ -14,7 +14,10 @@ export async function createProject(data: unknown) {
     }
   }
 
-  // Insert into Supabase
+  // Get the authenticated Supabase client
+  const supabase = await createServerActionClient()
+
+  // Insert into Supabase (RLS will automatically filter by authenticated user)
   const { data: result, error } = await supabase
     .from("projects")
     .insert([validation.data])
