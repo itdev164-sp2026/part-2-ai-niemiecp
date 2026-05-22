@@ -2,6 +2,10 @@
 
 AI-native full-stack development with Next.js, Tailwind CSS, and Supabase.
 
+## Live Site
+
+Deployed at: [your-vercel-url](https://part-2-ai-niemiecp.vercel.app)
+
 ## Prerequisites
 
 - **Node.js** 20 or later — [Download](https://nodejs.org/)
