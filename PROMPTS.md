@@ -278,3 +278,75 @@ N/A
 > inside each page component?f
 
 The agent handled the creation well, it created the middleware.ts ater working on the Supabase SSR CLient Utilities, Authenication Schema & Actions, and the Login Page. I did not have to manually add any files. I was suprised that we modified just about as many files as we created despite implementing new features/objects. From personal experience, middleware auth is easier because I only have to check login in one place. Checking inside each page works, but it gets repetitive and easier to forget on some pages. Middleware feels cleaner because it blocks users before the page loads.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Activity 6: Deployment, Webhooks, & AI-Testing
+
+### Prompt 1
+**What I asked:**
+> (Paste the prompt you used to generate the Playwright tests)
+I have a Next.js app with Supabase Auth. Using @workspace context to
+understand the app structure, write an End-to-End (E2E) test file at
+tests/auth.spec.ts using Playwright.
+
+The tests should verify:
+
+1. LOGIN PAGE VISIBLE: Navigate to /login and confirm the login form
+   is visible (check for email input, password input, and submit button).
+
+2. REDIRECT AFTER LOGIN: After a successful login with valid credentials,
+   the user is redirected to the dashboard or projects page.
+
+3. SIDEBAR NAVIGATION: After login, verify that the sidebar navigation
+   links are visible: "Overview", "Projects", and "Settings".
+
+Requirements:
+- Use role-based locators (getByRole, getByLabel, getByText) instead of
+  CSS selectors or test IDs. This makes tests more accessible and resilient
+  to UI changes.
+- Add clear test descriptions that explain what each test verifies.
+- Handle the async nature of navigation and page loads with proper
+  Playwright waiting strategies.
+- Read test credentials from process.env.TEST_USER_EMAIL and
+  process.env.TEST_USER_PASSWORD. Do not hardcode credentials. If those
+  variables are not set, the credentialed tests should skip with a clear
+  message rather than fail.
+
+**What happened:**
+> (Did the Agent use role-based locators? Did it understand the auth
+> flow from your workspace context? Did the tests pass on the first run?)
+The agent successfully used role-based locators but failed to understand some of the flow causing a lot of the tests to fail. The test did not pass on the first run
+
+
+### Prompt 2
+**What I asked:**
+> (Paste the prompt you used to fix a failing test, or a follow-up
+> to improve test coverage)
+This Playwright test is failing with the following error:
+◇ injected env (0) from .env.local // tip: ⌘ suppress logs { quiet: true }
+  ✘  1 tests\auth.spec.ts:21:9 › Authentication Flow › 1. LOGIN PAGE VISIBLE › should display the login page with email, password inputs and submit button (5.9s)
+
+Look at the actual component code in @workspace and fix the test
+to match the real UI. Use role-based locators.
+
+
+**What happened:**
+> (Describe the iterative process — how many rounds did it take
+> to get the tests passing?)
+It failed twice. I was able to get it the after the second time.
+
+
+### Reflection
+> How does having an AI write and run tests change your confidence in
+> "hitting the deploy button"? Did the Agent catch anything you would
+> have missed? How does this compare to manually testing in the browser?
+Having AI write and run tests boosts my confidence because I'm still monitoring the proccesses and can always do it myself if I don't trust it. I usually catch things the agent misses, or maybe that's all I noticed. This is better than manual testing, way less repetitive on the developers end and less "annoying" in comparison.
+
+
+### Course Reflection
+> Look back at your complete PROMPTS.md from Activity 1 to Activity 6.
+> How has your prompting strategy evolved? What do you do differently
+> now compared to your first prompt in Activity 1? What is the most
+> important thing you learned about working with AI coding tools?
+
+My prompts felt more direct and to the point with new topics being started in new chats versus one long running chat where the agent will eventually get confused. AI coding tools are greats tools for expediting your work flow and allowing you to better focus your brain power on tasks.
